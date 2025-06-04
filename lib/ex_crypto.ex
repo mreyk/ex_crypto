@@ -303,25 +303,25 @@ defmodule ExCrypto do
     kind, error -> normalize_error(__STACKTRACE__, kind, error, {key, initialization_vector})
   end
 
-  @doc """
-  Same as `encrypt/4` except the `initialization_vector` is automatically generated.
+  # @doc """
+  # Same as `encrypt/4` except the `initialization_vector` is automatically generated.
 
-  A 128 bit `initialization_vector` is generated automatically by `encrypt/3`. It returns a tuple
-  containing the `initialization_vector`, the `cipher_text` and the `cipher_tag`.
+  # A 128 bit `initialization_vector` is generated automatically by `encrypt/3`. It returns a tuple
+  # containing the `initialization_vector`, the `cipher_text` and the `cipher_tag`.
 
-  ## Examples
+  # ## Examples
 
-      iex> clear_text = "my-clear-text"
-      iex> auth_data = "my-auth-data"
-      iex> {:ok, aes_256_key} = ExCrypto.generate_aes_key(:aes_256, :bytes)
-      iex> {:ok, {_ad, payload}} = ExCrypto.encrypt(aes_256_key, auth_data, clear_text)
-      iex> {_init_vec, cipher_text, cipher_tag} = payload
-      iex> assert(is_bitstring(cipher_text))
-      true
-      iex> assert(bit_size(cipher_tag) == 128)
-      true
+  #     iex> clear_text = "my-clear-text"
+  #     iex> auth_data = "my-auth-data"
+  #     iex> {:ok, aes_256_key} = ExCrypto.generate_aes_key(:aes_256, :bytes)
+  #     iex> {:ok, {_ad, payload}} = ExCrypto.encrypt(aes_256_key, auth_data, clear_text)
+  #     iex> {_init_vec, cipher_text, cipher_tag} = payload
+  #     iex> assert(is_bitstring(cipher_text))
+  #     true
+  #     iex> assert(bit_size(cipher_tag) == 128)
+  #     true
 
-  """
+  # """
   @spec encrypt(binary, binary, binary) ::
           {:ok, {binary, {binary, binary, binary}}} | {:error, binary}
   def encrypt(key, authentication_data, clear_text) do
